@@ -1,4 +1,4 @@
-const { smapleHandler } = require("./helper/routeHandler/sampleHandler");
+const { smapleHandler } = require("./handlers/routeHandlers/sampleHendler");
 const { notFoundHandler } = require("./helper/routeHandler/notFoundHandler");
 
 const routes = {}
