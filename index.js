@@ -26,11 +26,11 @@ app.handleReqRes = function handleReqRes(req, res) {
     const method = req.method.toLowerCase();
     // create decoder object
     const decoder = new StringDecoder("utf-8");
-    const parseData = '';
+    let parseData = '';
     const headers = req.headers;
-    req.on("data", (buffer) => { 
-        console.log(buffer.toString());
-        parseData += decoder.write(buffer);
+    req.on("data", (data) => { 
+        // console.log(data.toString());
+        parseData += decoder.write(data);
     });
     req.on("end", () => {
         parseData += decoder.end();
