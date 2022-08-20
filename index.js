@@ -28,22 +28,20 @@ app.handleReqRes = function handleReqRes(req, res) {
     const decoder = new StringDecoder("utf-8");
     const parseData = '';
     const headers = req.headers;
-    req.on("data", (data) => { 
-        console.log(data.toString());
-        parseData += decoder.write(data);
+    req.on("data", (buffer) => { 
+        console.log(buffer.toString());
+        parseData += decoder.write(buffer);
     });
     req.on("end", () => {
         parseData += decoder.end();
         console.log(parseData);
+        res.end("well come Single Page Application");
     });
- 
 
-
-
-  console.log(queryString);
+    console.log(queryString);
     console.log(headers);
     // create response
-  res.end("well come Single Page Application");
+  
 };
 // create server
 app.createServer();
