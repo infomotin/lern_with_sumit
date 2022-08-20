@@ -1,9 +1,11 @@
-const { handle } = require("./helper/routeHandler/sampleHandler");
+const { smapleHandler } = require("./helper/routeHandler/sampleHandler");
+const { notFoundHandler } = require("./helper/routeHandler/notFoundHandler");
 
 const routes = {}
 router = {
-    'sample':"",
-}
+  sample: smapleHandler,
+  notFound: notFoundHandler,
+};
 
 
 module.exports = routes;
