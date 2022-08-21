@@ -1,7 +1,8 @@
 const _url = require("url");
 const { StringDecoder } = require("string_decoder");
 const routers = require("../routes");
-const {notFoundHandler,} = require("../handlers/routeHandlers/notFoundHandler");
+const { notFoundHandler, } = require("../handlers/routeHandlers/notFoundHandler");
+const { parseJSON } = require("./utilites");
 const handler = {};
 handler.handleReqRes = function handleReqRes(req, res) {
   const parseUrl = _url.parse(req.url, true);
@@ -32,11 +33,13 @@ handler.handleReqRes = function handleReqRes(req, res) {
   });
   req.on("end", () => {
     parseData += decoder.end();
+    requestPropertice.body = parseJSON(parseData);
     chosePath(requestPropertice, (statusCode, payload) => {
       statusCode = typeof statusCode === "number" ? statusCode : 500;
       payload = typeof payload === "object" ? payload : {};
       const payloadString = JSON.stringify(payload);
       //return response
+      res.setHeader("Content-Type", "application/json");
       res.writeHead(statusCode);
       res.end(payloadString);
     });
