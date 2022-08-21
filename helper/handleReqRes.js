@@ -40,7 +40,7 @@ handler.handleReqRes = function handleReqRes(req, res) {
       res.writeHead(statusCode);
       res.end(payloadString);
     });
-    res.end("well come Single Page Application");
+    
   });
   // console.log(queryString);
   // console.log(headers);
