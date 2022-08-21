@@ -23,7 +23,7 @@ handler.handleReqRes = function handleReqRes(req, res) {
   const decoder = new StringDecoder("utf-8");
   let parseData = "";
   //check tramp path and call the handler
-  console.log(routers);
+  // console.log(routers);
   const chosePath = routers[treamPath] ? routers[treamPath] : notFoundHandler;
 
   chosePath(requestPropertice, (statusCode, payload) => {
