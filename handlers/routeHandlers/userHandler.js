@@ -3,18 +3,19 @@ const utilities = require("../../helper/utilites");
 const handle = {};
 handle.userHandler = function (requestPropertice, callback) {
 
+    console.log(requestPropertice.body);
 //as good programmer we should use try catch block to handle error
-    const acceptibleMethods = ["post", "get", "put", "delete"];
-    if (acceptibleMethods.indexOf(requestPropertice.method) > -1) { 
-        handle._users[requestPropertice.method](requestPropertice, callback);
-    }
+    // const acceptibleMethods = ["post", "get", "put", "delete"];
+    // if (acceptibleMethods.indexOf(requestPropertice.method) > -1) { 
+    //     handle._users[requestPropertice.method](requestPropertice, callback);
+    // }
     
-    else { 
-        callback(405, {
-            message: "method not allowed"
-        });
-        return;
-    }
+    // else { 
+    //     callback(405, {
+    //         message: "method not allowed"
+    //     });
+    //     return;
+    // }
 //create saparate function to handle post request for user data
     handle._users = {}
     handle._users.post = function (requestPropertice, callback) {
@@ -42,16 +43,7 @@ handle.userHandler = function (requestPropertice, callback) {
                     });
                     
                 }
-             });
-            
-            
-            
-            
-            
-            
-            
-            
-            
+             });   
         }
         else {
             callback(400, {
@@ -74,31 +66,28 @@ handle.userHandler = function (requestPropertice, callback) {
      
 
 //simple way to get the query string
-    // const reqMethod = requestPropertice.method;
-    // console.log(reqMethod);
-    // if (reqMethod.toLowerCase() === "get") { 
-    //     // console.log(requestPropertice);
-    //     callback(200, {
-    //         message: "get method are working",
-    //     });
-    // } else if (reqMethod.toLowerCase() === "post") {
-    //     callback(200, {
-    //         message: "post method are working",
-    //     });
-    
-    // }
-    // else if (reqMethod.toLowerCase() === "put") {
-    //   callback(200, {
-    //     message: "put method are working",
-    //   });
-    // } else if (reqMethod.toLowerCase() === "delete") {
-    //   callback(200, {
-    //     message: "delete method are working",
-    //   });
-    // } else {
-    //   callback(405, {
-    //     message: "method not allowed",
-    //   });
-    // }
+    const reqMethod = requestPropertice.method;
+    console.log(reqMethod);
+    if (reqMethod.toLowerCase() === "get") { 
+        // console.log(requestPropertice);
+        callback(200, {
+            message: "get method are working",
+        });
+    } else if (reqMethod.toLowerCase() === "post") {
+        handle._users.post(requestPropertice, callback);
+    }
+    else if (reqMethod.toLowerCase() === "put") {
+      callback(200, {
+        message: "put method are working",
+      });
+    } else if (reqMethod.toLowerCase() === "delete") {
+      callback(200, {
+        message: "delete method are working",
+      });
+    } else {
+      callback(405, {
+        message: "method not allowed",
+      });
+    }
 };
 module.exports = handle;

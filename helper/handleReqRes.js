@@ -33,13 +33,14 @@ handler.handleReqRes = function handleReqRes(req, res) {
   });
   req.on("end", () => {
     parseData += decoder.end();
+    console.log(requestPropertice.body);
     requestPropertice.body = parseJSON(parseData);
     chosePath(requestPropertice, (statusCode, payload) => {
       statusCode = typeof statusCode === "number" ? statusCode : 500;
       payload = typeof payload === "object" ? payload : {};
       const payloadString = JSON.stringify(payload);
       //return response
-      res.setHeader("Content-Type", "application/json");
+      // res.setHeader("Content-Type", "application/json");
       res.writeHead(statusCode);
       res.end(payloadString);
     });
