@@ -25,25 +25,21 @@ handler.handleReqRes = function handleReqRes(req, res) {
   //check tramp path and call the handler
   // console.log(routers);
   const chosePath = routers[treamPath] ? routers[treamPath] : notFoundHandler;
-
-  chosePath(requestPropertice, (statusCode, payload) => {
-    statusCode = typeof statusCode === "number" ? statusCode : 500;
-    payload = typeof payload === "object" ? payload : {};
-    const payloadString = JSON.stringify(payload);
-    //return response
-    res.writeHead(statusCode);
-    res.end(payloadString);
-  });
   // create decoder object
-  
-  
   req.on("data", (data) => {
     // console.log(data.toString());
     parseData += decoder.write(data);
   });
   req.on("end", () => {
     parseData += decoder.end();
-    console.log(parseData);
+    chosePath(requestPropertice, (statusCode, payload) => {
+      statusCode = typeof statusCode === "number" ? statusCode : 500;
+      payload = typeof payload === "object" ? payload : {};
+      const payloadString = JSON.stringify(payload);
+      //return response
+      res.writeHead(statusCode);
+      res.end(payloadString);
+    });
     res.end("well come Single Page Application");
   });
   // console.log(queryString);

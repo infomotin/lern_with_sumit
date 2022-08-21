@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "motin": "nodemon index.js"
+    "motin": "NODE_ENV=staging nodemon index.js",
+    "prod": "NODE_ENV=production nodemon index.js"
   },
   "dependencies": {
     "lodash": "^4.17.21",
