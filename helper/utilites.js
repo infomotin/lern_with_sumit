@@ -15,10 +15,7 @@ utilities.parseJSON = function (jsonData) {
 //hasing password
 utilities.hash = function (string) {
     if (typeof string === 'string' && string.length > 0) {
-        const hash = _crypto
-          .createHmac("sha256", environments[process.env.NODE_ENV].secretKey)
-          .update(string)
-          .digest("hex");
+        return _crypto.createHmac("sha256", environments[process.env.NODE_ENV].secretKey).update(string).digest("hex");
     } else {
         return false;
     }

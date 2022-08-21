@@ -1,4 +1,5 @@
-const data  = require('../../lib/data');
+const data = require('../../lib/data');
+const utilities = require("../../helper/utilites");
 const handle = {};
 handle.userHandler = function (requestPropertice, callback) {
 
@@ -28,12 +29,11 @@ handle.userHandler = function (requestPropertice, callback) {
             data.read('users', phone, function (err, data) {
                 if (err) {
                     const userData = {
-                        firstName: firstName,
-                        lastName: lastName,
-                        phone: phone,
-                        password: password,
-                        tosAgreement: true
-                        
+                      firstName: firstName,
+                      lastName: lastName,
+                      phone: phone,
+                      password: utilities.hash(password),
+                      tosAgreement: true,
                     };
                 }
                 else { 
