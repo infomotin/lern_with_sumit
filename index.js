@@ -20,7 +20,17 @@ const app = {};
 //     }
 //   }
 // );
+
+// update file 
+data.update("test", "newFile", { "name": "Motin", "language": "Bangla" }, (err) => {
+  if (!err) {
+    console.log("file updated");
+  } else {
+    console.log(err);
+  }
+});
 // data read data file
+
 data.read("test", "newFile", (err, data) => { 
     if (!err && data) {
     console.log(data);
